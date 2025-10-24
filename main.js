@@ -245,9 +245,9 @@ function nextQuestion() {
         if (correct.length + incorrect.length == keys.length) {
             mainContent.innerHTML = `
                 <h1>Puntos/Resultados</h1>
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h3>${correct.length}/${keys.length}</h3>
-                </div>
+                <h3>You scored <strong>${correct.length}</strong> out of <strong>${keys.length}</strong>!</h3>
+                <p><strong>Correct terms:</strong> ${correct.join(", ")}.</p>
+                <p><strong>Incorrect terms:</strong> ${incorrect.join(", ")}.</p>
             `;
         } else {
             mainContent.innerHTML = `
@@ -297,5 +297,4 @@ function fadeIn(element) {
             element.style.opacity = opacity;
         }
     }, 20);
-
 }
