@@ -241,10 +241,6 @@ function nextQuestion() {
             }
             current_vocab_word = keys[randomInt(0, keys.length - 1)];
         }
-
-        console.log(correct.length + incorrect.length);
-        console.log(correct);
-        console.log(incorrect);
         
         if (correct.length + incorrect.length == keys.length) {
             mainContent.innerHTML = `
@@ -301,4 +297,5 @@ function fadeIn(element) {
             element.style.opacity = opacity;
         }
     }, 20);
+
 }
