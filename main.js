@@ -30,8 +30,7 @@ const vocabulary = {
         "bath gel", "shower gel"
     ],
     "el maquillaje": [
-        "makeup", "cosmetics", "beauty products", "foundation", "powder", "lipstick", 
-        "eye shadow", "concealer", "makeup kit"
+        "makeup", "makeup", "cosmetics", "greasepaint", "make-up"
     ],
     "la pasta de dientes": [
         "toothpaste", "dental paste", "tooth gel", "tooth cream", "tooth cleaning paste"
@@ -69,7 +68,7 @@ const vocabulary = {
     ],
 
     "bañar": [
-        "to bathe", "to give a bath", "to wash", "to clean", "to soak"
+        "to bathe", "to wash", "to clean", "to soak"
     ],
     "bañarse": [
         "to bathe oneself", "to take a bath", "to wash oneself", "to soak oneself", 
