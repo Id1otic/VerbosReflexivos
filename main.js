@@ -1,182 +1,142 @@
 const mainContent = document.querySelector('.main-content');
 const vocabulary = {
-    "el acondicionador": [
-        "conditioner", "hair conditioner", "hair softener", "moisturizing conditioner", 
-        "leave-in conditioner", "rinse", "hair treatment", "hair moisturizer"
-    ],
-    "el cepillo de dientes": [
-        "toothbrush", "dental brush", "teeth brush", "brushing tool"
-    ],
-    "el champú": [
-        "shampoo", "hair shampoo", "hair wash", "cleanser", "hair cleaner", "hair soap", 
-        "bathing shampoo", "cleansing shampoo"
-    ],
-    "el desodorante": [
-        "deodorant", "antiperspirant", "body deodorant", "roll-on", "spray deodorant", 
-        "stick deodorant", "body spray"
-    ],
-    "el despertador": [
-        "alarm clock", "alarm", "wake-up clock", "morning alarm", "bedside alarm", 
-        "digital alarm", "clock alarm"
-    ],
-    "el espejo": [
-        "mirror", "looking glass", "reflector", "makeup mirror", "bathroom mirror"
-    ],
-    "el jabón": [
-        "soap", "bar soap", "hand soap", "bath soap", "body soap", "cleaning bar", "soap bar"
-    ],
-    "el jabón líquido": [
-        "liquid soap", "hand soap", "body wash", "liquid hand soap", "gel soap", 
-        "bath gel", "shower gel"
-    ],
-    "el maquillaje": [
-        "makeup", "makeup", "cosmetics", "greasepaint", "make-up"
-    ],
-    "la pasta de dientes": [
-        "toothpaste", "dental paste", "tooth gel", "tooth cream", "tooth cleaning paste"
-    ],
-    "el peine": [
-        "comb", "hair comb", "pocket comb", "fine-tooth comb", "wide-tooth comb", 
-        "hair styling comb"
-    ],
-    "la ropa": [
-        "clothes", "clothing", "outfit", "attire", "garments", "wardrobe", "apparel", 
-        "dress", "clothes set", "wardrobe items"
-    ],
-    "la secadora de pelo": [
-        "hair dryer", "blow dryer", "hair blower", "hair drier", "dryer", 
-        "electric hair dryer", "hot air dryer"
-    ],
-    "la toalla": [
-        "towel", "bath towel", "hand towel", "washcloth", "beach towel", 
-        "face towel", "drying towel"
-    ],
-
-    "afeitar": [
-        "to shave", "to do shaving", "to cut facial hair", "to trim", "to groom"
-    ],
-    "afeitarse": [
-        "to shave oneself", "to shave", "to get a shave", "to remove hair", "to shave one's face"
-    ],
-
-    "acostar": [
-        "to put to bed", "to lay down", "to put someone to sleep", "to help to bed"
-    ],
-    "acostarse": [
-        "to go to bed", "to lie down", "to go to sleep", "to turn in", "to hit the bed", 
-        "to get into bed", "to rest", "to lie down to sleep"
-    ],
-
-    "bañar": [
-        "to bathe", "to wash", "to clean", "to soak"
-    ],
-    "bañarse": [
-        "to bathe oneself", "to take a bath", "to wash oneself", "to soak oneself", 
-        "to have a bath", "to get clean", "to freshen up"
-    ],
-
-    "cepillar": [
-        "to brush", "to scrub", "to sweep lightly", "to polish"
-    ],
-    "cepillarse": [
-        "to brush oneself", "to brush one's hair", "to do one's hair", "to comb hair", 
-        "to tidy hair"
-    ],
-    "cepillarse los dientes": [
-        "to brush one's teeth", "to clean one's teeth", "to brush the teeth", "to do dental brushing"
-    ],
-
-    "despertar": [
-        "to wake up", "to rouse", "to awaken", "to stir", "to bring to wakefulness"
-    ],
-    "despertarse": [
-        "to wake oneself", "to wake up", "to get up", "to open one's eyes", "to stop sleeping"
-    ],
-
-    "duchar": [
-        "to give a shower", "to shower someone", "to wash", "to bathe quickly"
-    ],
-    "ducharse": [
-        "to shower oneself", "to take a shower", "to wash up", "to get clean", "to have a shower"
-    ],
-
-    "gastar": [
-        "to spend", "to waste", "to use up", "to consume", "to deplete", "to burn through"
-    ],
-
-    "lavar": [
-        "to wash", "to clean", "to rinse", "to scrub", "to cleanse"
-    ],
-    "lavarse los dientes": [
-        "to wash one's teeth", "to brush one's teeth", "to clean one's teeth", 
-        "to do dental cleaning"
-    ],
-
-    "levantar": [
-        "to lift", "to raise", "to get up", "to pick up", "to elevate", "to hoist"
-    ],
-    "levantarse": [
-        "to get oneself up", "to get up", "to rise", "to stand up", "to wake up", 
-        "to get out of bed"
-    ],
-
-    "maquillar": [
-        "to put on makeup", "to apply makeup", "to do makeup", "to decorate the face"
-    ],
-    "maquillarse": [
-        "to put makeup on oneself", "to do one's makeup", "to apply cosmetics", 
-        "to put on beauty products", "to get made up"
-    ],
-
-    "mirar": [
-        "to look", "to watch", "to glance", "to observe", "to gaze", "to see", 
-        "to take a look", "to look at"
-    ],
-    "mirarse": [
-        "to look at oneself", "to see oneself in the mirror", "to check oneself", 
-        "to glance at oneself"
-    ],
-
-    "peinar": [
-        "to comb", "to style hair", "to brush hair", "to tidy hair", "to smooth hair"
-    ],
-    "peinarse": [
-        "to comb one's hair", "to style one's hair", "to brush one's hair", 
-        "to fix one's hair", "to groom oneself"
-    ],
-
-    "ponerse la ropa": [
-        "to put on clothes", "to get dressed", "to dress oneself", "to put clothing on", 
-        "to wear clothes", "to change into clothes"
-    ],
-
-    "quitar": [
-        "to take off", "to remove", "to strip", "to pull off", "to get rid of"
-    ],
-    "quitarse": [
-        "to take off oneself", "to remove one's clothing", "to undress", "to take something off", 
-        "to get undressed"
-    ],
-
-    "secar": [
-        "to dry", "to wipe dry", "to air dry", "to make dry", "to remove moisture"
-    ],
-    "secarse": [
-        "to dry oneself", "to get dry", "to towel off", "to dry off", "to become dry"
-    ],
-    "secarse el pelo": [
-        "to dry one's hair", "to blow-dry one's hair", "to towel-dry hair", 
-        "to dry off hair", "to remove moisture from hair"
-    ],
-
-    "vestir": [
-        "to dress", "to clothe", "to attire", "to put on clothing", "to wear"
-    ],
-    "vestirse": [
-        "to dress oneself", "to get dressed", "to put on clothes", "to change clothes", 
-        "to clothe oneself", "to get ready", "to dress up"
-    ],
+    "el acondicionador": "conditioner",
+    "el cepillo de dientes": "toothbrush",
+    "el champú": "shampoo",
+    "el desodorante": "deodorant",
+    "el despertador": "alarm clock",
+    "el espejo": "mirror",
+    "el jabón": "soap",
+    "el jabón líquido": "liquid soap",
+    "el maquillaje": "makeup",
+    "la pasta de dientes": "toothpaste",
+    "el peine": "comb",
+    "la ropa": "clothes",
+    "la secadora de pelo": "hair dryer",
+    "la toalla": "towel",
+    "afeitar": "to shave",
+    "afeitarse": "to shave oneself",
+    "acostar": "to put to bed",
+    "acostarse": "to go to bed",
+    "bañar": "to bathe",
+    "bañarse": "to take a bath",
+    "cepillar": "to brush",
+    "cepillarse": "to brush oneself",
+    "cepillarse los dientes": "to brush one's teeth",
+    "despertar": "to wake",
+    "despertarse": "to wake up",
+    "duchar": "to shower",
+    "ducharse": "to take a shower",
+    "gastar": "to spend",
+    "lavar": "to wash",
+    "lavarse los dientes": "to brush one's teeth",
+    "levantar": "to lift",
+    "levantarse": "to get up",
+    "maquillar": "to put on makeup",
+    "maquillarse": "to do one's makeup",
+    "mirar": "to look",
+    "mirarse": "to look at oneself",
+    "peinar": "to comb",
+    "peinarse": "to comb one's hair",
+    "ponerse la ropa": "to put on clothes",
+    "quitar": "to remove",
+    "quitarse": "to take off",
+    "secar": "to dry",
+    "secarse": "to dry oneself",
+    "secarse el pelo": "to dry one's hair",
+    "vestir": "to dress",
+    "vestirse": "to get dressed"
 };
+
+function looselyMatches(input, correctAnswer) {
+    // Step 1: normalize case, spacing
+    input = input.toLowerCase().trim();
+    correctAnswer = correctAnswer.toLowerCase().trim();
+
+    // Step 2: normalize pronouns & reflexives
+    const replacements = [
+        ["oneself", "themselves"],
+        ["themself", "themselves"],
+        ["one's", "their"],
+        ["ones", "their"],
+        ["self", "themselves"],
+        ["myself", "themselves"],
+        ["yourself", "themselves"],
+        ["himself", "themselves"],
+        ["herself", "themselves"],
+        ["theirself", "themselves"],
+        ["the ", ""],
+        ["a ", ""],
+        ["to ", ""],
+        ["  ", " "]
+    ];
+    for (let [from, to] of replacements) {
+        input = input.replaceAll(from, to);
+        correctAnswer = correctAnswer.replaceAll(from, to);
+    }
+
+    // Step 3: remove punctuation
+    input = input.replace(/[^\w\s]/g, "");
+    correctAnswer = correctAnswer.replace(/[^\w\s]/g, "");
+
+    // Step 4: handle simple plurals
+    function normalizeWord(word) {
+        if (word.endsWith("ies")) return word.slice(0, -3) + "y";
+        if (word.endsWith("ves")) return word.slice(0, -3) + "f";
+        if (word.endsWith("s") && !word.endsWith("ss")) return word.slice(0, -1);
+        return word;
+    }
+
+    const inputWords = input.split(/\s+/).map(normalizeWord);
+    const correctWords = correctAnswer.split(/\s+/).map(normalizeWord);
+
+    // Step 5: overlap ratio ignoring word order
+    let matches = 0;
+    for (let word of correctWords) {
+        if (inputWords.includes(word)) matches++;
+    }
+    const ratio = matches / correctWords.length;
+
+    // Step 6: reflexive-verb handling
+    const reflexiveVerbs = [
+        "wash", "bathe", "dry", "dress", "shave", "shower", "wake", "look", "call", "prepare"
+    ];
+    for (let verb of reflexiveVerbs) {
+        // if both contain the verb and any reflexive pronoun form
+        const reflexiveForms = ["themselves", "themself", "oneself", "self"];
+        if (
+            input.includes(verb) &&
+            correctAnswer.includes(verb) &&
+            reflexiveForms.some(r => input.includes(r) || correctAnswer.includes(r))
+        ) {
+            return true;
+        }
+    }
+
+    // Step 7: known equivalent phrase groups
+    const equivalents = [
+        ["brush teeth", "brush their teeth"],
+        ["dry hair", "dry their hair"],
+        ["wake up", "get up"],
+        ["go to bed", "lie down"],
+        ["get dressed", "dress themselves"],
+        ["wash face", "wash their face"],
+        ["wash hands", "wash their hands"],
+        ["bathe", "take a bath"],
+        ["shower", "take a shower"]
+    ];
+    for (let [a, b] of equivalents) {
+        if (
+            (input.includes(a) && correctAnswer.includes(b)) ||
+            (input.includes(b) && correctAnswer.includes(a))
+        ) {
+            return true;
+        }
+    }
+
+    // Step 8: allow 75% or higher word overlap
+    return ratio >= 0.75;
+}
 
 let correct = [];
 let incorrect = [];
@@ -192,12 +152,22 @@ for (let key of keys) {
     spanish.textContent = key;
 
     const english = document.createElement('span');
-    english.textContent = ' — ' + vocabulary[key].join(', ');
+    english.textContent = ' — ' + vocabulary[key];
 
     entry.appendChild(spanish);
     entry.appendChild(english);
     container.appendChild(entry);
 }
+
+const ETCheckbox = document.getElementById('english-terms-checkbox');
+let ETChecked;
+ETCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        ETChecked = true
+    } else {
+        ETChecked = false
+    }
+});
 
 function randomInt(min, max) {
     min = Math.ceil(min);
@@ -218,14 +188,14 @@ function checkInput() {
             nextButton.disabled = false;
             checkButton.disabled = true;
             
-            status.innerText = "Status: ❌";
-            incorrect.push(current_vocab_word);
-            for (let i = 0; i < vocabulary[current_vocab_word].length; i++) { // Check if it matches
-                if (val.toLowerCase() == vocabulary[current_vocab_word][i]) {
-                    status.innerText = "Status: ✅";
-                    correct.push(current_vocab_word);
-                    incorrect.pop();
-                }
+            const correctAnswer = ETChecked ? current_vocab_word : vocabulary[current_vocab_word];
+            if (looselyMatches(val, correctAnswer)) {
+                status.innerText = "Status: ✅";
+                correct.push(current_vocab_word);
+                incorrect.pop();
+            } else {
+                status.innerText = "Status: ❌";
+                incorrect.push(current_vocab_word);
             }
         }
     }
@@ -249,10 +219,14 @@ function nextQuestion() {
                 <p><strong>Incorrect terms:</strong> ${incorrect.join(", ")}.</p>
             `;
         } else {
+            let fixed_word = ETChecked
+                ? vocabulary[current_vocab_word].slice(0, 1).toUpperCase() + vocabulary[current_vocab_word].slice(1)
+                : current_vocab_word.slice(0, 1).toUpperCase() + current_vocab_word.slice(1);
+            
             mainContent.innerHTML = `
                 <h1>La Prueba de Vocabulario</h1>
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h3>${current_vocab_word.slice(0, 1).toUpperCase() + current_vocab_word.slice(1)}</h3>
+                    <h3>${fixed_word}</h3>
                     <h3 id="status">Status: ❓</h3>
                 </div>            
                 <input type="text" placeholder="Answer/Translation" id="answer-input">
