@@ -14,23 +14,19 @@ const vocabulary = {
     "la ropa": "clothes",
     "la secadora de pelo": "hair dryer",
     "la toalla": "towel",
-    "afeitar": "to shave",
-    "afeitarse": "to shave oneself",
-    "acostar": "to put to bed",
+    "afeitarse": "to shave",
     "acostarse": "to go to bed",
-    "bañar": "to bathe",
-    "bañarse": "to take a bath",
+    "bañarse": "to bathe",
     "cepillar": "to brush",
     "cepillarse": "to brush oneself",
     "cepillarse los dientes": "to brush one's teeth",
     "despertar": "to wake",
-    "despertarse": "to wake up",
+    "despertarse": "to wake oneself up",
     "duchar": "to shower",
     "ducharse": "to take a shower",
     "gastar": "to spend",
     "lavar": "to wash",
-    "lavarse los dientes": "to brush one's teeth",
-    "levantar": "to lift",
+    "lavarse los dientes": "to wash one's teeth",
     "levantarse": "to get up",
     "maquillar": "to put on makeup",
     "maquillarse": "to do one's makeup",
@@ -39,104 +35,29 @@ const vocabulary = {
     "peinar": "to comb",
     "peinarse": "to comb one's hair",
     "ponerse la ropa": "to put on clothes",
-    "quitar": "to remove",
     "quitarse": "to take off",
     "secar": "to dry",
     "secarse": "to dry oneself",
     "secarse el pelo": "to dry one's hair",
-    "vestir": "to dress",
     "vestirse": "to get dressed"
 };
 
-function looselyMatches(input, correctAnswer) {
-    // Step 1: normalize case, spacing
-    input = input.toLowerCase().trim();
-    correctAnswer = correctAnswer.toLowerCase().trim();
+const nGrams = (value, n = 3) => {
+  const pad = " ".repeat(n - 1);
+  value = pad + value + pad;
+  return Array(value.length - n + 1)
+    .fill("")
+    .map((_, index) => value.slice(index, index + n));
+};
 
-    // Step 2: normalize pronouns & reflexives
-    const replacements = [
-        ["oneself", "themselves"],
-        ["themself", "themselves"],
-        ["one's", "their"],
-        ["ones", "their"],
-        ["self", "themselves"],
-        ["myself", "themselves"],
-        ["yourself", "themselves"],
-        ["himself", "themselves"],
-        ["herself", "themselves"],
-        ["theirself", "themselves"],
-        ["the ", ""],
-        ["a ", ""],
-        ["to ", ""],
-        ["  ", " "]
-    ];
-    for (let [from, to] of replacements) {
-        input = input.replaceAll(from, to);
-        correctAnswer = correctAnswer.replaceAll(from, to);
-    }
-
-    // Step 3: remove punctuation
-    input = input.replace(/[^\w\s]/g, "");
-    correctAnswer = correctAnswer.replace(/[^\w\s]/g, "");
-
-    // Step 4: handle simple plurals
-    function normalizeWord(word) {
-        if (word.endsWith("ies")) return word.slice(0, -3) + "y";
-        if (word.endsWith("ves")) return word.slice(0, -3) + "f";
-        if (word.endsWith("s") && !word.endsWith("ss")) return word.slice(0, -1);
-        return word;
-    }
-
-    const inputWords = input.split(/\s+/).map(normalizeWord);
-    const correctWords = correctAnswer.split(/\s+/).map(normalizeWord);
-
-    // Step 5: overlap ratio ignoring word order
-    let matches = 0;
-    for (let word of correctWords) {
-        if (inputWords.includes(word)) matches++;
-    }
-    const ratio = matches / correctWords.length;
-
-    // Step 6: reflexive-verb handling
-    const reflexiveVerbs = [
-        "wash", "bathe", "dry", "dress", "shave", "shower", "wake", "look", "call", "prepare"
-    ];
-    for (let verb of reflexiveVerbs) {
-        // if both contain the verb and any reflexive pronoun form
-        const reflexiveForms = ["themselves", "themself", "oneself", "self"];
-        if (
-            input.includes(verb) &&
-            correctAnswer.includes(verb) &&
-            reflexiveForms.some(r => input.includes(r) || correctAnswer.includes(r))
-        ) {
-            return true;
-        }
-    }
-
-    // Step 7: known equivalent phrase groups
-    const equivalents = [
-        ["brush teeth", "brush their teeth"],
-        ["dry hair", "dry their hair"],
-        ["wake up", "get up"],
-        ["go to bed", "lie down"],
-        ["get dressed", "dress themselves"],
-        ["wash face", "wash their face"],
-        ["wash hands", "wash their hands"],
-        ["bathe", "take a bath"],
-        ["shower", "take a shower"]
-    ];
-    for (let [a, b] of equivalents) {
-        if (
-            (input.includes(a) && correctAnswer.includes(b)) ||
-            (input.includes(b) && correctAnswer.includes(a))
-        ) {
-            return true;
-        }
-    }
-
-    // Step 8: allow 75% or higher word overlap
-    return ratio >= 0.75;
-}
+const nGramSimilarity = (stringA, stringB, n = 3) => {
+  if (stringA === stringB) return 1;
+  const a = new Set(nGrams(stringA, n));
+  const b = new Set(nGrams(stringB, n));
+  const common = new Set([...a].filter(x => b.has(x)));
+  const total = new Set([...a, ...b]);
+  return common.size / (total.size || Infinity);
+};
 
 let correct = [];
 let incorrect = [];
@@ -189,7 +110,8 @@ function checkInput() {
             checkButton.disabled = true;
             
             const correctAnswer = ETChecked ? current_vocab_word : vocabulary[current_vocab_word];
-            if (looselyMatches(val, correctAnswer)) {
+            console.log(`Accuracy: ${nGramSimilarity(val, correctAnswer) * 100}%`)
+            if (nGramSimilarity(val, correctAnswer) >= 0.5) {
                 status.innerText = "Status: ✅";
                 correct.push(current_vocab_word);
                 incorrect.pop();
